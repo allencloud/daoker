@@ -7,7 +7,7 @@ import (
 
 // CompareDockerVersion compares current docker version with specified docker version
 // curVersion: 1.10.0
-// comVersion :1.2.0
+// comVersion: 1.2.0
 // return true
 func CompareDockerVersion(curVersion, comVersion string) (bool, error) {
 	current := strings.SplitN(curVersion, ".", 3)

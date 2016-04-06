@@ -30,8 +30,10 @@ going to do.
 
 Following is two most important principles:
 
-* never to contact with docker daemon
-* take advantage of DOCKER_ROOT and cgroup filesystem to do everything you want
+* **NEVER** to contact with docker daemon
+* take advantage of **DOCKER_ROOT** and **CGROUP FILESYSTEM** to do everything you want
+
+## Get Started
 
 ## Installation
 

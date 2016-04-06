@@ -53,18 +53,9 @@ func Containers() ([]Container, error) {
 			continue
 		}
 
-		// If docker version differs, json file's name differs, too.
-		// config.json in 1.10.0-, while config.v2.json in 1.10.0+
-		var configFilename string
-		match, err := util.CompareDockerVersion(GetDockerVersion(), "1.10.0")
+		configFilename, err := getConfigFilename()
 		if err != nil {
-		}
-
-		// If match is true, it means current docker version is newer or at least equal.
-		if match {
-			configFilename = "config.v2.json"
-		} else {
-			configFilename = "config.json"
+			return nil, err
 		}
 
 		containerJsonPath := filepath.Join(containersPath, entryName, configFilename)
@@ -79,6 +70,26 @@ func Containers() ([]Container, error) {
 	return containers, nil
 }
 
+// getConfigFilename gets container's config file name by docker version
+// If docker version differs, json file's name differs, too.
+// config.json in 1.10.0-, while config.v2.json in 1.10.0+
+func getConfigFilename() (string, error) {
+	var configFilename string
+
+	match, err := util.CompareDockerVersion(GetDockerVersion(), "1.10.0")
+	if err != nil {
+		return "", err
+	}
+	// If match is true, it means current docker version is newer or at least equal.
+	if match {
+		configFilename = "config.v2.json"
+	} else {
+		configFilename = "config.json"
+	}
+	return configFilename, nil
+}
+
+// containerFromJson unmarshals json file into a container instance
 func containerFromJson(file string) (Container, error) {
 	data, err := ioutil.ReadAll(file)
 	if err != nil {
