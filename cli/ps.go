@@ -4,7 +4,7 @@ import (
 	//"fmt"
 	log "github.com/Sirupsen/logrus"
 
-	"github.com/allencloud/daoker/docker"
+	"../docker"
 	"github.com/codegangsta/cli"
 )
 
@@ -13,5 +13,9 @@ func listContainers(c *cli.Context) {
 	containers, err := docker.Containers()
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	for _, con := range containers {
+
 	}
 }

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/allencloud/daoker/cli"
+	"./cli"
 )
 
 func main() {
