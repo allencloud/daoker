@@ -51,7 +51,7 @@ func ContainsPid(pid int)(string, error){
 func ContainerPidNum(containerID string)(int, error){
 	cgroupRoot := GetCgroupsRoot()
 
-	procsPath := filepath.Join(cgroupRoot, "memory", "docker", containerID, "cgroups.procs")
+	procsPath := filepath.Join(cgroupRoot, "memory", "docker", containerID, "cgroup.procs")
 
 	pids, err := getPidsInContainer(procsPath)
 	if err != nil {
@@ -64,7 +64,7 @@ func ContainerPidNum(containerID string)(int, error){
 
 // findPid returns true, if containerID has this pid
 func findPid(path, containerID string, pid int)(bool, error){
-	procsPath := filepath.Join(path, containerID, "cgroups.procs")
+	procsPath := filepath.Join(path, containerID, "cgroup.procs")
 
 	pids, err := getPidsInContainer(procsPath)
 	if err != nil {
