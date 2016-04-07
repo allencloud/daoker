@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+
+	"github.com/docker/docker/pkg/parsers/kernel"
 )
 
 // CompareDockerVersion compares current docker version with specified docker version
@@ -43,4 +45,25 @@ func CompareDockerVersion(curVersion, comVersion string) (bool, error) {
 
 	// version, major, minor are all the same
 	return true, nil
+}
+
+// CheckKernel returns nil if current kernel version is not lower
+// than the given one
+func CheckKernel(k, major, minor int) error {
+	leastVersionInfo := kernel.VersionInfo{
+		Kernel: k,
+		Major:  major,
+		Minor:  minor,
+	}
+
+	if v, err := kernel.GetKernelVersion(); err != nil {
+		return err
+	} else {
+		if kernel.CompareKernelVersion(*v, leastVersionInfo) < 0 {
+			msg := fmt.Sprintf("Your Linux kernel(%d.%d.%d) is too old to support Hyper daemon(%d.%d.%d+)",
+				v.Kernel, v.Major, v.Minor, k, major, minor)
+			return fmt.Errorf(msg)
+		}
+		return nil
+	}
 }
