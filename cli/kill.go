@@ -37,6 +37,5 @@ func killContainer(c *cli.Context) {
 		os.Exit(1)
 	}
 
-	os.Exit(0)
-
+	fmt.Printf("Container %s has been killed successfully", container.ID)
 }
