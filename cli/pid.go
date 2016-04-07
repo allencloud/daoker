@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"os"
 	"fmt"
+	"os"
 	"strconv"
 
 	"../cgroups"
@@ -31,7 +31,7 @@ func pidContainer(c *cli.Context) {
 		if err == cgroups.ErrPidInNoContainer {
 			fmt.Print(err.Error())
 			os.Exit(0)
-		}else{
+		} else {
 			log.Fatalf("Failed to find pid in cgroups filesystem (%v)", err)
 			os.Exit(1)
 		}

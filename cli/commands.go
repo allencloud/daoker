@@ -35,9 +35,9 @@ var (
 			Action: oomContainer,
 		},
 		{
-			Name:	"pidnum",
-			Usage:	"Print process numbers in your specified container",
-			Action:	pidNumContainer,
+			Name:   "pidnum",
+			Usage:  "Print process numbers in your specified container",
+			Action: pidNumContainer,
 		},
 	}
 )

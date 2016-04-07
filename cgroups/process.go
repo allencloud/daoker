@@ -1,12 +1,12 @@
 package cgroups
 
 import (
-	"fmt"
-	"os"
-	"io/ioutil"
-	"strconv"
 	"errors"
+	"fmt"
+	"io/ioutil"
+	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
@@ -15,7 +15,7 @@ var ErrPidInNoContainer = errors.New("No container has your input pid.")
 
 // ContainsPid returns container ID if given pid in it,
 // and returns an error if not found or got an error
-func ContainsPid(pid int)(string, error){
+func ContainsPid(pid int) (string, error) {
 	cgroupRoot := GetCgroupsRoot()
 
 	// FIXME:
@@ -26,12 +26,12 @@ func ContainsPid(pid int)(string, error){
 	// traverse all dirs which are all container_id
 	dirs, _ := ioutil.ReadDir(dockerSubsystemPath)
 
-	for _, dir := range dirs{
-		if dir.IsDir() == false{
+	for _, dir := range dirs {
+		if dir.IsDir() == false {
 			continue
 		}
 
-		found, err := findPid(dockerSubsystemPath, dir.Name(),pid)
+		found, err := findPid(dockerSubsystemPath, dir.Name(), pid)
 		if err != nil {
 			continue
 		}
@@ -39,7 +39,7 @@ func ContainsPid(pid int)(string, error){
 		// container dir.Name() contains pid
 		if found == true {
 			return dir.Name(), nil
-		}else{
+		} else {
 			continue
 		}
 	}
@@ -48,7 +48,7 @@ func ContainsPid(pid int)(string, error){
 
 // ContainerPidNum returns pid number given ID container contains,
 // and returns an error if not found or got an error
-func ContainerPidNum(containerID string)(int, error){
+func ContainerPidNum(containerID string) (int, error) {
 	cgroupRoot := GetCgroupsRoot()
 
 	procsPath := filepath.Join(cgroupRoot, "memory", "docker", containerID, "cgroup.procs")
@@ -61,9 +61,8 @@ func ContainerPidNum(containerID string)(int, error){
 	return len(pids), nil
 }
 
-
 // findPid returns true, if containerID has this pid
-func findPid(path, containerID string, pid int)(bool, error){
+func findPid(path, containerID string, pid int) (bool, error) {
 	procsPath := filepath.Join(path, containerID, "cgroup.procs")
 
 	pids, err := getPidsInContainer(procsPath)
@@ -73,7 +72,7 @@ func findPid(path, containerID string, pid int)(bool, error){
 
 	// traverse
 	for _, value := range pids {
-		if value == strconv.Itoa(pid){
+		if value == strconv.Itoa(pid) {
 			return true, nil
 		}
 	}
@@ -81,8 +80,8 @@ func findPid(path, containerID string, pid int)(bool, error){
 	return false, fmt.Errorf("Container %s has no pid %d", containerID, pid)
 }
 
-// getPidsContainer gets an array of all pids in a container 
-func getPidsInContainer(path string)([]string, error){
+// getPidsContainer gets an array of all pids in a container
+func getPidsInContainer(path string) ([]string, error) {
 	_, err := os.Stat(path)
 	if err != nil {
 		return nil, err

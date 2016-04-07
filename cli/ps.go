@@ -16,7 +16,7 @@ func listContainers(c *cli.Context) {
 	}
 
 	for index, con := range containers {
-		fmt.Println(index)
+		fmt.Println(index + 1)
 		fmt.Printf("Name:%s \n", con.Name)
 		fmt.Printf("ID:  %s \n", con.ID)
 		fmt.Printf("Status:%s \n", con.State.StateString())
