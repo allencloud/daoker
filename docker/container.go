@@ -80,7 +80,8 @@ func getContainer(IDOrName string) (Container, error) {
 
 	// if more than 1 container ID has the prefix, return an error
 	if matchedNum >= 2 {
-		return Container{}, fmt.Errorf("More than one container have container ID prefix of %s", IDOrName)
+		return Container{}, fmt.Errorf("More than one container have container ID prefix of %s\n"+
+			"Please specify another container ID.", IDOrName)
 	}
 
 	// exact 1 container matches IDOrName
@@ -90,7 +91,7 @@ func getContainer(IDOrName string) (Container, error) {
 
 	// TODO: support container name matching
 	if matchedNum == 0 {
-		return Container{}, fmt.Errorf("No such container ID %s", IDOrName)
+		return Container{}, fmt.Errorf("No container with such ID %s", IDOrName)
 	}
 
 	return Container{}, nil

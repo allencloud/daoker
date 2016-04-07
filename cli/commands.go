@@ -34,5 +34,10 @@ var (
 			Usage:  "Return true if a container is under oom",
 			Action: oomContainer,
 		},
+		{
+			Name:	"pidnum",
+			Usage:	"Print process numbers in your specified container",
+			Action:	pidNumContainer,
+		},
 	}
 )
