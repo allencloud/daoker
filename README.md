@@ -17,8 +17,8 @@ that Docker Daemon does not work as we wish, such as :
 
 If situations above happen to you, we can judge that you lose the control of docker.
 If it is your developing environment, you can change a machine with Docker to avoid
-some problems. And if is a production environment, I think everyone had realised the
-gravity of this situation.
+some problems. And if it is production environment, I think everyone should realized
+the gravity of this situation.
 
 ## Principles
 As Docker Daemon fails, we have no idea about whether docker api is working which

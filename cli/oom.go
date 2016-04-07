@@ -2,8 +2,8 @@ package cli
 
 import (
 	"fmt"
-	"os"
 
+	"../cgroups"
 	"../docker"
 	log "github.com/Sirupsen/logrus"
 	"github.com/codegangsta/cli"
@@ -16,7 +16,7 @@ func oomContainer(c *cli.Context) {
 	}
 
 	IDOrName := c.Args()[0]
-	container, err := docker.Container(IDOrName)
+	container, err := docker.GetContainer(IDOrName)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
