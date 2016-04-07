@@ -35,13 +35,72 @@ Following is two most important principles:
 
 ## Get Started
 
-## Installation
+Daoker is CLI tool to handle tough things when docker daemon fails. We had better read
+`daoker help` to get more instruments.
 
-## Building Daoker
+```
+root@daocloud:~/daoker# daoker help
+NAME:
+   daoker - A tool to manage Docker environment when Docker fails
+
+USAGE:
+   daoker [global options] command [command options] [arguments...]
+
+VERSION:
+   0.0.1
+
+AUTHOR(S):
+   Allen Sun <allen.sun@daocloud.io>
+
+COMMANDS:
+    ps		List containers
+    kill	Stop a container forcefully
+    stop	Stop a container
+    volume	Show all details of a container's volumes
+    pid		Print container name if it contains the given pid
+    oom		Return true if a container is under oom
+    pidnum	Print process numbers in your specified container
+
+GLOBAL OPTIONS:
+   --debug			debug mode [$DEBUG]
+   --log-level, -l "info"	Log level (options: debug, info, warn, error, fatal, panic)
+   --help, -h			show help
+   --version, -v		print the version
+```
+
+Then enjoy your jouney with daoker if you happen to find some commands are helpful to you.
+
+
+## Build and Install Daoker
+Before you **Build** and **Install** daoker, you should know some prerequisition:
+
+* Linux only
+* Ubuntu preferred
+* Golang 1.5+ preferred
+* Docker 1.10.0+ tested, lower version will be tested soon
+
+```
+git clone https://github.com/allencloud/daoker.git
+cd daoker
+export GOPATH=`pwd`
+go build -o daoker
+
+mv daoker /usr/local/bin
+
+```
+
+Now `daoker` is in your PATH.
 
 ## Participating
 
-## Copyright and license
+You can contribute to Daoker in several different ways:
 
+* To report a problem or request a feature, please feel free to file an issue.
+
+* Of course, we welcome pull requests and patches. Setting up a local Daoker development environment and submitting PRs is described here.
+
+
+## Copyright and license
+Copyright © 2016. All rights reserved
 
 
