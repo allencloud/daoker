@@ -1,10 +1,12 @@
 package cgroups
 
 import (
+	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 
-	"../utils"
+	//"../utils"
 )
 
 // CheckContainerOOM searches memory.oom_control of this container
@@ -19,13 +21,13 @@ func CheckContainerOOM(ID string) (bool, error) {
 		return false, err
 	}
 
-	switch char {
+	switch ch {
 	case '0':
 		return false, nil
 	case '1':
 		return true, nil
 	default:
-		return false, fmt.Error("Unexpected char got when checking %s", oomFilepath)
+		return false, fmt.Errorf("Unexpected char got when checking %s", oomFilepath)
 	}
 }
 
@@ -35,9 +37,9 @@ func CheckContainerOOM(ID string) (bool, error) {
 // under_oom 0
 func readUnderOomChar(oomFilepath string) (byte, error) {
 	// check if file exists
-	_, err := os.Stat(filename)
+	_, err := os.Stat(oomFilepath)
 	if err != nil && os.IsExist(err) {
-		return '-', fmt.Error("File %s does not exist. Maybe your container is not running.", oomFilepath)
+		return '-', fmt.Errorf("File %s does not exist. Maybe your container is not running.", oomFilepath)
 	}
 
 	// read details from file

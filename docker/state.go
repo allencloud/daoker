@@ -177,69 +177,6 @@ func (s *State) getExitCode() int {
 	return res
 }
 
-// SetRunning sets the state of the container to "running".
-func (s *State) SetRunning(pid int, initial bool) {
-	s.Error = ""
-	s.Running = true
-	s.Paused = false
-	s.Restarting = false
-	s.ExitCode = 0
-	s.Pid = pid
-	if initial {
-		s.StartedAt = time.Now().UTC()
-	}
-	close(s.waitChan) // fire waiters for start
-	s.waitChan = make(chan struct{})
-}
-
-// SetStoppedLocking locks the container state is sets it to "stopped".
-func (s *State) SetStoppedLocking(exitStatus *ExitStatus) {
-	s.Lock()
-	s.SetStopped(exitStatus)
-	s.Unlock()
-}
-
-// SetStopped sets the container state to "stopped" without locking.
-func (s *State) SetStopped(exitStatus *ExitStatus) {
-	s.Running = false
-	s.Paused = false
-	s.Restarting = false
-	s.Pid = 0
-	s.FinishedAt = time.Now().UTC()
-	s.setFromExitStatus(exitStatus)
-	close(s.waitChan) // fire waiters for stop
-	s.waitChan = make(chan struct{})
-}
-
-// SetRestartingLocking is when docker handles the auto restart of containers when they are
-// in the middle of a stop and being restarted again
-func (s *State) SetRestartingLocking(exitStatus *ExitStatus) {
-	s.Lock()
-	s.SetRestarting(exitStatus)
-	s.Unlock()
-}
-
-// SetRestarting sets the container state to "restarting".
-// It also sets the container PID to 0.
-func (s *State) SetRestarting(exitStatus *ExitStatus) {
-	// we should consider the container running when it is restarting because of
-	// all the checks in docker around rm/stop/etc
-	s.Running = true
-	s.Restarting = true
-	s.Pid = 0
-	s.FinishedAt = time.Now().UTC()
-	s.setFromExitStatus(exitStatus)
-	close(s.waitChan) // fire waiters for stop
-	s.waitChan = make(chan struct{})
-}
-
-// SetError sets the container's error state. This is useful when we want to
-// know the error that occurred when container transits to another state
-// when inspecting it
-func (s *State) SetError(err error) {
-	s.Error = err.Error()
-}
-
 // IsPaused returns whether the container is paused or not.
 func (s *State) IsPaused() bool {
 	s.Lock()
@@ -254,30 +191,4 @@ func (s *State) IsRestarting() bool {
 	res := s.Restarting
 	s.Unlock()
 	return res
-}
-
-// SetRemovalInProgress sets the container state as being removed.
-// It returns true if the container was already in that state.
-func (s *State) SetRemovalInProgress() bool {
-	s.Lock()
-	defer s.Unlock()
-	if s.RemovalInProgress {
-		return true
-	}
-	s.RemovalInProgress = true
-	return false
-}
-
-// ResetRemovalInProgress make the RemovalInProgress state to false.
-func (s *State) ResetRemovalInProgress() {
-	s.Lock()
-	s.RemovalInProgress = false
-	s.Unlock()
-}
-
-// SetDead sets the container state to "dead"
-func (s *State) SetDead() {
-	s.Lock()
-	s.Dead = true
-	s.Unlock()
 }

@@ -17,7 +17,7 @@ func killContainer(c *cli.Context) {
 	}
 
 	IDOrName := c.Args()[0]
-	container, err := docker.Container(IDOrName)
+	container, err := docker.GetContainer(IDOrName)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

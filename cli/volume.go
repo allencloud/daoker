@@ -2,8 +2,6 @@ package cli
 
 import (
 	"fmt"
-	"os"
-	"syscall"
 
 	"../docker"
 	log "github.com/Sirupsen/logrus"
@@ -17,9 +15,11 @@ func volumeContainer(c *cli.Context) {
 	}
 
 	IDOrName := c.Args()[0]
-	container, err := docker.Container(IDOrName)
+	container, err := docker.GetContainer(IDOrName)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	fmt.Println(container.Config.Volumes)
 
 }
