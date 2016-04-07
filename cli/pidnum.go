@@ -10,7 +10,7 @@ import (
 	"github.com/codegangsta/cli"
 )
 
-// pidNumContainer returns returns pid number given ID container contains
+// pidNumContainer returns pid number the given ID container contains
 func pidNumContainer(c *cli.Context) {
 	if len(c.Args()) != 1 {
 		log.Fatalf("Pid command takes exact one argument. See '%s pid --help'.", c.App.Name)
