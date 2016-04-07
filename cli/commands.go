@@ -11,7 +11,7 @@ var (
 		},
 		{
 			Name:   "kill",
-			Usage:  "Stop a container forcefully",
+			Usage:  "Stop a container by force",
 			Action: killContainer,
 		},
 		{
@@ -38,6 +38,11 @@ var (
 			Name:   "pidnum",
 			Usage:  "Print process numbers in your specified container",
 			Action: pidNumContainer,
+		},
+		{
+			Name:   "addlog",
+			Usage:  "Add specific details into a container's log",
+			Action: logContainer,
 		},
 	}
 )

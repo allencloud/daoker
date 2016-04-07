@@ -28,7 +28,7 @@ This document describes some important features daoker is going to realize.
 ## Log
 
 - [ ] get logs of a container
-- [ ] add some log into container's log by force
+- [x] add some log into container's log by force
 
 
 ## Processes

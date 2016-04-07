@@ -22,6 +22,7 @@ type Container struct {
 	Args    []string
 	Config  *containertypes.Config
 	Name    string
+	LogPath string
 }
 
 // Containers returns an array of docker containers unmarshaled from config.json
