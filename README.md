@@ -83,6 +83,7 @@ Before you **Build** and **Install** daoker, you should know some prerequisition
 git clone https://github.com/allencloud/daoker.git
 cd daoker
 export GOPATH=`pwd`
+go get -d
 go build -o daoker
 
 mv daoker /usr/local/bin
