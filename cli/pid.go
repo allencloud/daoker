@@ -22,7 +22,7 @@ func pidContainer(c *cli.Context) {
 
 	pidNum, err := strconv.Atoi(pidNumStr)
 	if err != nil {
-		log.Fatalf("Pid command's argument should be positive, invalid input(%s)", pidNumStr)
+		log.Fatalf("Pid command's argument should be positive, invalid input (%s)", pidNumStr)
 		os.Exit(1)
 	}
 
@@ -32,7 +32,7 @@ func pidContainer(c *cli.Context) {
 			fmt.Print(err.Error())
 			os.Exit(0)
 		}else{
-			log.Fatalf("Failed to find pid in cgroups filesystem(%v)", err)
+			log.Fatalf("Failed to find pid in cgroups filesystem (%v)", err)
 			os.Exit(1)
 		}
 	}
