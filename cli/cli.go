@@ -5,6 +5,8 @@ import (
 	"os"
 	"path"
 
+	"../version"
+
 	log "github.com/Sirupsen/logrus"
 	"github.com/codegangsta/cli"
 )
@@ -14,7 +16,7 @@ func Run() {
 	app := cli.NewApp()
 	app.Name = path.Base(os.Args[0])
 	app.Usage = "A tool to manage Docker environment when Docker fails"
-	app.Version = "0.0.1"
+	app.Version = version.VERSION
 
 	app.Author = "Allen Sun"
 	app.Email = "allen.sun@daocloud.io"
