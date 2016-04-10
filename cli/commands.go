@@ -40,8 +40,11 @@ var (
 			Action: pidNumContainer,
 		},
 		{
-			Name:   "addlog",
+			Name:   "logs",
 			Usage:  "Add specific details into a container's log",
+			Flags: []cli.Flag{
+				flLogAppend,flLogSize,
+			},
 			Action: logContainer,
 		},
 	}
