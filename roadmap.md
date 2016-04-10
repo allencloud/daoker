@@ -20,15 +20,15 @@ This document describes some important features daoker is going to realize.
 
 ## Volume
 
-- [ ] get volume details of a container
-- [ ] get a specific data volume disk space usage
-- [ ] get a specific data volume inode usage
+- [x] get volume details of a container
+- [x] get a specific data volume disk space usage
+- [x] get a specific data volume inode usage
 
 
 ## Log
 
 - [ ] get logs of a container
-- [ ] get size of a container's log, only json-file supported
+- [x] get size of a container's log, only json-file supported
 - [x] add some log into container's log by force
 
 

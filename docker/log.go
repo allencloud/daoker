@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"os"
 	"time"
+
+	"../utils"
+	"github.com/docker/go-units"
 )
 
 type JSONLog struct {
@@ -43,4 +46,10 @@ func AddContainerLog(logPath string, content string) error {
 	}
 
 	return nil
+}
+
+// GetContainerLogSize returns human readable size of container's log file
+func GetContainerLogSize(logFile string) string {
+	logFileSize := utils.GetDirDiskSpace(logFile)
+	return units.HumanSize(logFileSize)
 }
