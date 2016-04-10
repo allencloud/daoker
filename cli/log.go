@@ -57,7 +57,7 @@ func appendContainerLog(c *cli.Context) {
 		"You can check by by command 'docker logs %s'", ID, ID)
 }
 
-func getContainerLogSize(c *cli.Context){
+func getContainerLogSize(c *cli.Context) {
 	if len(c.Args()) != 1 {
 		log.Fatalf("logs command takes more than 1 argument. See '%s logs --help'.", c.App.Name)
 	}
@@ -71,7 +71,7 @@ func getContainerLogSize(c *cli.Context){
 	ID := container.ID
 	logPath := container.LogPath
 
-	sizeStr := docker.GetContainerLogSize(logPath) 
+	sizeStr := docker.GetContainerLogSize(logPath)
 
 	fmt.Printf("Container %d has a log file with size %s", ID, sizeStr)
 }

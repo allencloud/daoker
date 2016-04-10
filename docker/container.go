@@ -14,16 +14,16 @@ import (
 )
 
 type Container struct {
-	ID      string
-	State   State
-	Pnum    int
-	Created time.Time
-	Path    string
-	Args    []string
-	Config  *containertypes.Config
-	MountPoints            map[string]MountPoint
-	Name    string
-	LogPath string
+	ID          string
+	State       State
+	Pnum        int
+	Created     time.Time
+	Path        string
+	Args        []string
+	Config      *containertypes.Config
+	MountPoints map[string]MountPoint
+	Name        string
+	LogPath     string
 }
 
 // Containers returns an array of docker containers unmarshaled from config.json

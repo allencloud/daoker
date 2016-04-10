@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/docker/go-units"
 	"../utils"
+	"github.com/docker/go-units"
 )
+
 // MountPoint is the intersection point between a volume and a container. It
 // specifies which volume is to be used and where inside a container it should
 // be mounted.
@@ -16,7 +17,7 @@ type MountPoint struct {
 	RW          bool   // True if writable
 	Name        string // Name set by user
 	Driver      string // Volume driver to use
-	
+
 	//Volume      Volume `json:"-"`
 
 	// Note Mode is not used on Windows
@@ -33,9 +34,9 @@ type MountPoint struct {
 }
 
 // ContainerVolumeUsage gets the disk usage and inode usage of a volume
-// only internal volumes are considered like "VOLUME /var/lib/mysql" in Dockerfile 
+// only internal volumes are considered like "VOLUME /var/lib/mysql" in Dockerfile
 // we will skip "-v a:b" volumes
-func ContainerVolumeUsage(mp MountPoint)(string, int64, error){
+func ContainerVolumeUsage(mp MountPoint) (string, int64, error) {
 	mountPath, err := getHostMountPath(mp.Name)
 	if err != nil {
 		return "", 0, err
@@ -52,8 +53,8 @@ func ContainerVolumeUsage(mp MountPoint)(string, int64, error){
 }
 
 // getHostMountPath gets absolute host path of volume
-func getHostMountPath(name string) (string , error) {
-	if name == ""{
+func getHostMountPath(name string) (string, error) {
+	if name == "" {
 		return "", fmt.Errorf("not an internal volume")
 	}
 
@@ -66,5 +67,3 @@ func getHostMountPath(name string) (string , error) {
 
 	return hostMountPath, nil
 }
-
-

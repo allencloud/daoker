@@ -19,16 +19,16 @@ func volumeContainer(c *cli.Context) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	
-	fmt.Printf("Container %s has %d volumes",container.ID, len(container.MountPoints))
+
+	fmt.Printf("Container %s has %d volumes", container.ID, len(container.MountPoints))
 
 	i := 1
 	for _, mount := range container.MountPoints {
 		fmt.Printf(" Volume %d :", i)
 		i++
 
-		fmt.Printf("  └ Host src Path: %s\n",)
-		fmt.Printf("  └ Container Dst Path: %s\n",)
+		fmt.Printf("  └ Host src Path: %s\n")
+		fmt.Printf("  └ Container Dst Path: %s\n")
 
 		diskUsage, inodeUsage, err := docker.ContainerVolumeUsage(mount)
 		if err != nil {
