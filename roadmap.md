@@ -28,6 +28,7 @@ This document describes some important features daoker is going to realize.
 ## Log
 
 - [ ] get logs of a container
+- [ ] get size of a container's log, only json-file supported
 - [x] add some log into container's log by force
 
 
