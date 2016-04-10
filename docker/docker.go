@@ -2,6 +2,7 @@ package docker
 
 import (
 	"os"
+	"path/filepath"
 )
 
 const DefaultDockerRoot string = "/var/lib/docker"
@@ -14,6 +15,15 @@ func GetDockerRoot() string {
 		dockerRoot = DefaultDockerRoot
 	}
 	return dockerRoot
+}
+
+// GetVolumeRoot gets docker volume path in Docker environment
+func GetVolumeRoot() string {
+	dockerRoot := os.Getenv("DOCKER_ROOT")
+	if dockerRoot == "" {
+		dockerRoot = filepath.Join(DefaultDockerRoot, "volumes")
+	}
+	return filepath.Join(dockerRoot, "volumes")
 }
 
 // GetDockerVersion gets docker version from env

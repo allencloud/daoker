@@ -6,10 +6,10 @@ import (
 )
 
 // GetDirDiskSpace returns disk space a directory including all files takes
-func GetDirDiskSpace(path string) int64 {
-	size := int64(0)
+func GetDirDiskSpace(path string) float64 {
+	size := float64(0)
 	filepath.Walk(path, func(_ string, file os.FileInfo, _ error) error {
-		size += int64(file.Size())
+		size += float64(file.Size())
 		return nil
 	})
 	return size

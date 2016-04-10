@@ -21,6 +21,7 @@ type Container struct {
 	Path    string
 	Args    []string
 	Config  *containertypes.Config
+	MountPoints            map[string]MountPoint
 	Name    string
 	LogPath string
 }
