@@ -104,56 +104,6 @@ func IsValidStateString(s string) bool {
 	return true
 }
 
-func wait(waitChan <-chan struct{}, timeout time.Duration) error {
-	if timeout < 0 {
-		<-waitChan
-		return nil
-	}
-	select {
-	case <-time.After(timeout):
-		return fmt.Errorf("Timed out: %v", timeout)
-	case <-waitChan:
-		return nil
-	}
-}
-
-// WaitRunning waits until state is running. If state is already
-// running it returns immediately. If you want wait forever you must
-// supply negative timeout. Returns pid, that was passed to
-// SetRunning.
-func (s *State) WaitRunning(timeout time.Duration) (int, error) {
-	s.Lock()
-	if s.Running {
-		pid := s.Pid
-		s.Unlock()
-		return pid, nil
-	}
-	waitChan := s.waitChan
-	s.Unlock()
-	if err := wait(waitChan, timeout); err != nil {
-		return -1, err
-	}
-	return s.GetPID(), nil
-}
-
-// WaitStop waits until state is stopped. If state already stopped it returns
-// immediately. If you want wait forever you must supply negative timeout.
-// Returns exit code, that was passed to SetStoppedLocking
-func (s *State) WaitStop(timeout time.Duration) (int, error) {
-	s.Lock()
-	if !s.Running {
-		exitCode := s.ExitCode
-		s.Unlock()
-		return exitCode, nil
-	}
-	waitChan := s.waitChan
-	s.Unlock()
-	if err := wait(waitChan, timeout); err != nil {
-		return -1, err
-	}
-	return s.getExitCode(), nil
-}
-
 // IsRunning returns whether the running flag is set. Used by Container to check whether a container is running.
 func (s *State) IsRunning() bool {
 	s.Lock()
