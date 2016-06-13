@@ -47,5 +47,10 @@ var (
 			},
 			Action: logContainer,
 		},
+		{
+			Name:   "pidexc",
+			Usage:  "Print containers whose process number exceeds a specified number",
+			Action: pidExcContainer,
+		},
 	}
 )
