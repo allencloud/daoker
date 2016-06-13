@@ -10,7 +10,7 @@ This document describes some important features daoker is going to realize.
 - [x] check if a container is under oom
 - [ ] get dns details of a container
 - [ ] get hosts details of a container
-- [ ] get hostname detaild of a container
+- [ ] get hostname details of a container
 
 ## Image
 
