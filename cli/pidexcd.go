@@ -3,7 +3,6 @@ package cli
 import (
 	"fmt"
 	"strconv"
-	"os"
 
 	"../cgroups"
 	"../docker"
@@ -21,8 +20,7 @@ func pidExcContainer(c *cli.Context) {
 
 	excdNum, err := strconv.Atoi(excdNumStr)
 	if err != nil {
-		log.Fatalf("Pidexc command's argument should be positive, invalid input (%s)", excdNumStr)
-		os.Exit(1)
+		log.Fatalf("Pidexc command's argument is invalid (%s)", excdNumStr)
 	}
 
 	containers, err := docker.Containers()
