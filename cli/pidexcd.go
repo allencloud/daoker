@@ -35,7 +35,7 @@ func pidExcContainer(c *cli.Context) {
 
 		num, err := cgroups.ContainerPidNum(ID)
 		if err != nil {
-			log.Fatal(err.Error())
+			log.Fatal(err)
 		}
 
 		if num > excdNum {
