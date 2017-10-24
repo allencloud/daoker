@@ -7,7 +7,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 )
 
-// this is a main function which is used by daoker
+// ^-^ this is a main function which is used by daoker
 func main() {
 	// check running kernel version
 	if err := utils.CheckKernel(3, 10, 0); err != nil {
