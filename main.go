@@ -15,5 +15,6 @@ func main() {
 	}
 
 	// start command line work
+
 	cli.Run()
 }
