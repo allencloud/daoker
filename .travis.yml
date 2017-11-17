@@ -16,10 +16,5 @@ notifications:
     on_cancel: always
     on_success: always
 
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y -qq autoconf automake
-
 script:
-  - cd ${TRAVIS_BUILD_DIR}
-  - sudo hack/make.sh 
+  - exit 1
