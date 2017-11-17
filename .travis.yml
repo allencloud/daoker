@@ -1,0 +1,25 @@
+dist: trusty
+sudo: required
+
+language: go
+go:
+  - 1.8.3
+    
+go_import_path: github.com/allencloud/daoker
+
+notifications:
+  webhooks:
+    urls:
+      - http://121.201.13.205:9876/ci_notifications
+    on_failure: always
+    on_error: always
+    on_cancel: always
+    on_success: always
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -qq autoconf automake
+
+script:
+  - cd ${TRAVIS_BUILD_DIR}
+  - sudo hack/make.sh 
