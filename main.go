@@ -15,6 +15,5 @@ func main() {
 	}
 
 	// start command line work
-	// asdfghjk
 	cli.Run()
 }
