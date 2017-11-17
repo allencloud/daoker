@@ -5,16 +5,11 @@ language: go
 go:
   - 1.8.3
     
-go_import_path: github.com/allencloud/daoker
+go_import_path: github.com/allencloud/pouch
 
 notifications:
-  webhooks:
-    urls:
-      - http://121.201.13.205:9876/ci_notifications
-    on_failure: always
-    on_error: always
-    on_cancel: always
-    on_success: always
+  email:
+    - shlazww@163.com
 
 before_install:
   - sudo apt-get update -qq
